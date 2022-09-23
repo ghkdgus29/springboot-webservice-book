@@ -38,7 +38,7 @@ dependencies {
 	implementation 'org.mariadb.jdbc:mariadb-java-client'
 }
 
-jar{
+jar {
 	enabled = false
 }
 
