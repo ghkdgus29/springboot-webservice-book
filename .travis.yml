@@ -14,10 +14,29 @@ cache:
 
 script: "./gradlew clean build"
 
+before_install:
+  - chmod +x gradlew
+
+before_deploy:
+  - zip -r springboot-webservice-book *
+  - mkdir -p deploy
+  - mv springboot-webservice-book.zip deploy/springboot-webservice-book.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+
+    secret_access_key: $AWS_SECERET_KEY
+
+    bucket: springboot-webservice-book-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
+
 notifications:
   email:
     recipients:
       - ghkdgus29@naver.com
 
-before_install:
-  - chmod +x gradlew
