@@ -35,6 +35,20 @@ deploy:
     local_dir: deploy
     wait-until-deployed: true
 
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECERET_KEY
+
+    bucket: springboot-webservice-book-build
+    key: springboot-webservice-book.zip
+
+    bundle_type: zip
+    application: springboot-webservice-book
+    deployment_group: springboot-webservice-book-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+
+
 notifications:
   email:
     recipients:
